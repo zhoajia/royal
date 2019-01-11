@@ -4,6 +4,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		
+<meta name="format-detection" content="telephone=yes"/>
 		<title>华卓装饰</title>
 		<link type="text/css" rel="stylesheet" href="css/hui.css" />
 		<style type="text/css">
@@ -26,6 +28,9 @@
 					<div class="hui-swipe-item">
 						<a href="javascript:void(0)"><img width="100%" height="200px" src="img/2.jpg" /></a>
 					</div>
+					<div class="hui-swipe-item">
+						<a href="javascript:void(0)"><img width="100%" height="200px" src="img/3.jpg" /></a>
+					</div>
 				</div>
 			</div>
 
@@ -37,7 +42,7 @@
 			<div class="hui-wrap">
 				<div class="hui-flex"  style="flex-wrap:wrap;">
 					<div class="demo">
-						<img width="100%" height="100%" src="img/华卓装饰竖版.png" />
+						<img width="100%" height="100%" src="img/无背景.png" />
 					</div>
 
 					<div class="hui-content demo1" style="">
@@ -45,6 +50,17 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="hui-wrap">
+					<div >
+						<h3>主营系统</h3>
+					</div>
+
+					<div class="hui-content" style="">
+						家装建材，木工板，免漆板，集成墙饰，集成吊顶，开关插座，马桶卫浴，地板，门业，豪华衣架，灯饰···
+					</div>
+			</div>
+			
 			<div style="background-image: url(img/backgroundImage.jpg);">
 				<div class="hui-content hui-text-center">
 			        <h3 style="color: #ff6537;">优质舒适家居等着你</h3>
@@ -53,31 +69,79 @@
 			 	<form style="" class="hui-form" id="form1">
 					<div class="hui-form-items">
 					    <div class="hui-form-items-title" >您的称呼</div>
-					    <input type="text" class="hui-input hui-input-clear" name="nickname" placeholder="如：张三" />
+					    <input type="text" class="hui-input hui-input-clear" id="nickname" name="nickname" placeholder="如:吉祥" />
 					</div>
 					<div class="hui-form-items">
 					    <div class="hui-form-items-title">您的电话</div>
-					    <input type="text" class="hui-input hui-input-clear" name="nickname" placeholder="如：张三" />
+					    <input type="text" class="hui-input hui-input-clear" id="phone" name="nickname" placeholder="如:13616218498" />
 					</div>
 					<div class="hui-form-items">
 					    <div class="hui-form-items-title">详细需求</div>
 					    <div class="hui-form-textarea">
-					        <textarea placeholder="备注..." name="note"></textarea>
+					        <textarea id="text" placeholder="需求..." name="note"></textarea>
 					    </div>
+					</div>
+					<div>
+						<button onclick="x()" type="button" class="hui-button hui-button-large hui-primary" style="margin-top:15px;">提交</button>
+					</div>
+					<div style="margin-top: 20px;">
+						<span>联系我们 </span></br>
+						<span>电话：
+								<a href="tel:13616218498">13616218498</a>,13814875012</span></br>
+						<span>地址：通州区平潮镇汽车站北500米荣事达时尚生活旗舰店</span>
 					</div>
 				</form>
 			</div>
 		</div>
-		<div>
-
-		</div>
+	
 	</body>
 	<script type="text/javascript" src="js/hui.js"></script>
 	<script type="text/javascript" src="js/hui-swipe.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 		//轮播图控件 1
 		var swipe = new huiSwpie('#swipe');
 		swipe.run();
+		
+		function x(){
+			var userName=$("#nickname").val();
+			var phone=$("#phone").val();
+			var text=$("#text").val();
+			if(phone==''||phone==null){
+				hui.toast('电话不可为空哦，留下电话让我联系你吧！');
+			}
+			$.ajax({
+				type: "post",
+				url: "/stock/warehouse/findStockWarehouses?r=" + Math.random(),
+				dataType: "json",
+				success: function(res) {
+					var html = '<option value="">请选择</option>';
+					if(res.success) {
+						var list = res.data;
+						if(list != null && list.length > 0) {
+							for(var i = 0; i < list.length; i++) {
+								html += '<option value="' + list[i].warehouseId + '">' + list[i].warehouseName + '</option>';
+							}
+						}
+					}
+					hui.iconToast('操作成功', 'success');
+				}
+			});	
+		}
+		
+		hui('#btn2').click(function(){
+			alert(window.plus)
+		    if(!window.plus){
+		        hui.alert('只能在h5+环境下运行！');
+		        return false;
+		    }
+		    var actionbuttons = [{title : "微信好友"}, {title : "朋友圈"}];
+		    var actionstyle   = {title : "请选择分享类型", cancel : "取消", buttons : actionbuttons};
+		    plus.nativeUI.actionSheet(actionstyle, function(e){
+		        console.log(e.index);
+		    });
+		});
+		
 	</script>
 
 </html>
