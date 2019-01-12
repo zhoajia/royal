@@ -4,41 +4,132 @@
 		<meta charset="UTF-8">
 		<title>热卖产品</title>
 		<link type="text/css" rel="stylesheet" href="css/hui.css" />
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/hui.js"></script>
 	</head>
 	<body>
-		<header class="hui-header">
-		    <div id="hui-back"></div>
-		    <h1>热卖商品</h1>
-		</header>
 		<div class="hui-wrap">
-		     <div class="hui-center-title" style="margin-top:22px;"><h1>媒体列表</h1></div>
-			    <div class="hui-media-list" style="padding:10px;">
+		     <div class="hui-center-title" style="margin-top:22px;"><h1>热卖商品</h1></div>
+			    <div class="hui-img-list" id="list2" style="padding:10px;float: right;">
 			        <ul>
 			            <li>
-			                <a href="javascript:hui.toast('hi...');">
-			                    <div class="hui-media-list-img"><img src="../img/medialist/1.jpg" /></div>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/集成墙面.jpg" /></div>
 			                    <div class="hui-media-content">
-			                        <h1>标题内容....</h1>
-			                        <p>power by hcoder.net</p>
+			                        <h3>荣事达系列集成墙饰</h3>
+			                        <p>更有竹邦等其他优秀品牌在售</p>
 			                    </div>
 			                </a>
 			            </li>
 			            <li>
-			                <a href="javascript:hui.toast('hi...');">
-			                    <div class="hui-media-list-img"><img src="../img/medialist/2.jpg" /></div>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/插座.jpg" /></div>
 			                    <div class="hui-media-content">
-			                        <h1>标题内容....</h1>
-			                        <p>power by hcoder.net</p>
+			                        <h3>荣事达系列开关插座促销大酬宾</h3>
+			                        <p>公牛开关插座售卖中</p>
 			                    </div>
 			                </a>
 			            </li>
 			            <li>
-			                <a href="javascript:hui.toast('hi...');">
-			                    <div class="hui-media-list-img"><img src="../img/medialist/3.jpg" /></div>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/集成吊顶.jpg" /></div>
 			                    <div class="hui-media-content">
-			                        <h1>标题内容....</h1>
-			                        <p>笑对人生，能穿透迷雾；笑对人生，能坚持到底；笑对人生，能化解危机；笑对人生，能照亮黑暗。</p>
+			                        <h3>荣事达系列集成吊顶</h3>
+			                        <p>多种品牌供您选择</p>
+			                    </div>
+			                </a>
+			            </li>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/马桶卫浴.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>荣事达系列马桶卫浴</h3>
+			                        <p>马桶,浴室柜,花洒,毛巾架及其他配件一站式购货</p>
+			                    </div>
+			                </a>
+			            </li>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/木门.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>智胜门业</h3>
+			                        <p>移门,玻璃门,艺术门,木艺门···多种品牌供您定制化选择,助您领驭生活</p>
+			                    </div>
+			                </a>
+			            </li>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/地板.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>实木复合地板</h3>
+			                        <p>多种品牌,多种选择</p>
+			                    </div>
+			                </a>
+			            </li>
+			    	</ul>
+			    </div>
+			    <div class="hui-img-list" id="list3" style="padding:10px;float: right;">
+			        <ul>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/绿博士.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>灯饰</h3>
+			                        <p>享受高端绿色生活</p>
+			                    </div>
+			                </a>
+			            </li>
+			             <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/绿博士.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>灯饰</h3>
+			                        <p>享受高端绿色生活</p>
+			                    </div>
+			                </a>
+			            </li>
+			             <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/联塑水管.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>联塑水管</h3>
+			                        <p>联塑水管，为您的安全护行</p>
+			                    </div>
+			                </a>
+			            </li>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/免漆板.png" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>板材</h3>
+			                        <p>多种板材,享受高端绿色化，多元化生活</p>
+			                    </div>
+			                </a>
+			            </li>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/雅迪阳光晾衣架.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>智能晾衣架，户外晾衣架</h3>
+			                        <p>结实耐用美观是我们不变的追求</p>
+			                    </div>
+			                </a>
+			            </li>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/好太太.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>好太太无烟厨房</h3>
+			                        <p>安全,环保,一见倾心,为您打造无烟厨房</p>
+			                    </div>
+			                </a>
+			            </li>
+			            <li>
+			                <a href="javascript:hui.toast('详询店内人员');">
+			                    <div class="hui-media-list-img"><img src="productList/装修辅材.jpg" /></div>
+			                    <div class="hui-media-content">
+			                        <h3>更多辅材</h3>
+			                        <p>详情询问店内导购</p>
 			                    </div>
 			                </a>
 			            </li>
@@ -46,4 +137,9 @@
 			    </div>
 		</div>
 	</body>
+	<script>
+		$("#list2").css("width","45%");
+		$("#list3").css("width","45%");
+		//$("#list2 li").css("float","left");
+	</script>
 </html>
