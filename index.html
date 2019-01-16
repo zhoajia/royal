@@ -53,7 +53,7 @@
 			
 			<div class="hui-wrap">
 					<div >
-						<h3>主营系统 <a style="float: right;" href="javascript:void(0)">>>点击查看更多</a></h3>
+						<h3>主营系统 <a style="float: right;" href="productList.html">>>点击查看更多热卖商品</a></h3>
 					</div>
 
 					<div class="hui-content" style="">
@@ -111,6 +111,7 @@
 		swipe.run();
 		
 		function x(){
+			debugger;
 			var userName=$("#nickname").val();
 			var phone=$("#phone").val();
 			var text=$("#text").val();
@@ -119,19 +120,15 @@
 			}
 			$.ajax({
 				type: "post",
-				url: "/stock/warehouse/findStockWarehouses?r=" + Math.random(),
+				url: "http://47.101.55.220:8080/emes/cusApply?r=" + Math.random(),
+				data:{
+					"userName":$("#nickname").val(),
+					"phone":$("#phone").val(),
+					"info":$("#text").val(),
+				},
 				dataType: "json",
 				success: function(res) {
-					var html = '<option value="">请选择</option>';
-					if(res.success) {
-						var list = res.data;
-						if(list != null && list.length > 0) {
-							for(var i = 0; i < list.length; i++) {
-								html += '<option value="' + list[i].warehouseId + '">' + list[i].warehouseName + '</option>';
-							}
-						}
-					}
-					hui.iconToast('操作成功', 'success');
+					hui.iconToast('提交成功', 'success');
 				}
 			});	
 		}
