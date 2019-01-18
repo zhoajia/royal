@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<title>抽奖</title>
+		<style>
+			body{
+                background-color:#d71f2e;
+                margin:0px;
+                padding:0px;
+              
+                color:#d71f2e;
+            }
+			.rotary {
+				position: relative;
+				width: 100%;
+				height: 800px;
+				background-size: 90%;
+				background: url(img/bg2.png) no-repeat ;
+			}
+			
+			.rotaryArrow {
+				position: absolute;
+				left: 139px;
+				top: 89px;
+				width: 294px;
+				height: 294px;
+				cursor: pointer;
+				background-image: url(img/arrow.png);
+				-webkit-tap-highlight-color:rgba(0,0,0,0);
+			}
+			
+			.list {
+				position: absolute;
+				right: 22%;
+				top: 15%;
+				width: 120px;
+				height: 320px;
+				overflow: hidden;
+			}
+			
+			.list h3 {
+				display: none;
+			}
+			
+			.list ul {
+				list-style-type: none;
+			}
+			
+			.list li {
+				height: 37px;
+				font: 14px/37px "Microsoft Yahei";
+				color: #ffea76;
+				text-indent: 25px;
+				background: url(img/user.png) 0 no-repeat;
+			}
+			
+			.result {
+				display: none;
+				position: absolute;
+				left: 130px;
+				top: 190px;
+				width: 400px;
+				height: 118px;
+				background-color: rgba(0, 0, 0, 0.75);
+				filter: alpha(opacity=90);
+			}
+			
+			.result a {
+				position: absolute;
+				right: 5px;
+				top: 5px;
+				width: 25px;
+				height: 25px;
+				text-indent: -100px;
+				background-image: url(images/close.png);
+				overflow: hidden;
+			}
+			
+			.result p {
+				padding: 25px 15px 0;
+				font: 32px "Microsoft Yahei";
+				color: #ffea76;
+				text-align: center;
+			}
+			
+			.result em {
+				color: #ffea76;
+				font-style: normal;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<img src="img/文字.png" style="margin-left: 10%;margin-top: 30px;margin-bottom: 5%;"/>
+		</div>
+		<div class="rotary" >
+			<div class="rotaryArrow" id="rotaryArrow" style="transform: rotate(268deg); transform-origin: 50% 50% 0px;"></div>
+		
+        	<div class="list">
+				<h3>中奖名单</h3>
+				<ul>
+					<li>jq22.com</li>
+					<li>1569****851</li>
+					<li>1515****206</li>
+					<li>1550****789</li>
+					<li>1370****627</li>
+					<li>1828****215</li>
+					<li>1589****572</li>
+					<li>1583****825</li>
+					<li>1396****805</li>
+					<li>1332****261</li>
+					<li>1884****863</li>
+					<li>1384****955</li>
+					<li>1897****137</li>
+					<li>1342****973</li>
+					<li>1558****071</li>
+					<li>1554****168</li>
+					<li>1562****018</li>
+					<li>1805****856</li>
+					<li>1354****809</li>
+					<li>1383****364</li>
+				</ul>
+			</div>
+        	<div >
+        		<img style="margin-left:10%;margin-top: 60%;" src="img/优惠券.jpg" />
+        	</div>
+			<div class="result" id="result" style="display: none;">
+				<p id="resultTxt">恭喜您获得了 <em>50</em> 元代金券</p>
+				<a href="javascript:" id="resultBtn" title="关闭">关闭</a>
+			</div>
+		</div>
+		
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+		<script src="js/jquery/jquery.rotate.min.js"></script>
+		<script>
+			$(function() {
+				var $rotaryArrow = $('#rotaryArrow');
+				var $result = $('#result');
+				var $resultTxt = $('#resultTxt');
+				var $resultBtn = $('#result');
+
+				$rotaryArrow.click(function() {
+					var data = [0, 1, 2, 3, 4, 5, 6, 7];
+					data = data[Math.floor(Math.random() * data.length)];
+					//TODO 后端获取中奖信息
+					
+					switch(data) {
+						case 1:
+							rotateFunc(1, 87, '恭喜您获得了 <em>1000</em> 元代金券');
+							break;
+						case 2:
+							rotateFunc(2, 43, '恭喜您获得了 <em>100</em> 元代金券');
+							break;
+						case 3:
+							rotateFunc(3, 134, '恭喜您获得了 <em>300</em> 元代金券');
+							break;
+						case 4:
+							rotateFunc(4, 177, '很遗憾，这次您未抽中奖，继续加油吧');
+							break;
+						case 5:
+							rotateFunc(5, 223, '恭喜您获得了 <em>荣事达排插</em>一个');
+							break;
+						case 6:
+							rotateFunc(6, 268, '恭喜您获得了 <em>500</em> 元代金券');
+							break;
+						case 7:
+							rotateFunc(7, 316, '恭喜您获得了 <em>荣事达开关</em>一个');
+							break;
+						default:
+							rotateFunc(0, 0, '很遗憾，这次您未抽中奖，继续加油吧');
+					}
+				});
+
+				var rotateFunc = function(awards, angle, text) { //awards:奖项，angle:奖项对应的角度
+					$rotaryArrow.stopRotate();
+					$rotaryArrow.rotate({
+						angle: 0,
+						duration: 5000,
+						animateTo: angle + 1440, //angle是图片上各奖项对应的角度，1440是让指针固定旋转4圈
+						callback: function() {
+							$resultTxt.html(text);
+							$result.show();
+						}
+					});
+				};
+
+				$result.click(function(){
+					$result.hide();
+				})
+				$rotaryArrow.click(function() {
+					$result.hide();
+				});
+			});
+		</script>
+
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				font-family: Consolas, arial, "宋体";
+			}
+			
+			h1 {
+				width: 900px;
+				margin: 40px auto;
+				font: 32px "Microsoft Yahei";
+				text-align: center;
+			}
+			
+			.explain,
+			.dowebok-explain {
+				margin-top: 20px;
+				font-size: 14px;
+				text-align: center;
+				color: #f50;
+			}
+			
+			.vad {
+				margin: 50px 0 5px;
+				font-family: Consolas, arial, 宋体;
+				text-align: center;
+			}
+			
+			.vad a {
+				display: inline-block;
+				height: 36px;
+				line-height: 36px;
+				margin: 0 5px;
+				padding: 0 50px;
+				font-size: 14px;
+				text-align: center;
+				color: #eee;
+				text-decoration: none;
+				background-color: #222;
+			}
+			
+			.vad a:hover {
+				color: #fff;
+				background-color: #000;
+			}
+			
+			.thead {
+				width: 728px;
+				height: 90px;
+				margin: 0 auto;
+				border-bottom: 40px solid #fff;
+			}
+			
+			.code {
+				position: relative;
+				margin-top: 100px;
+				padding-top: 41px;
+			}
+			
+			.code h3 {
+				position: absolute;
+				top: 0;
+				z-index: 10;
+				width: 100px;
+				height: 40px;
+				font: 16px/40px "Microsoft Yahei";
+				text-align: center;
+				cursor: pointer;
+			}
+			
+			.code .cur {
+				border: 1px solid #f0f0f0;
+				border-bottom: 1px solid #f8f8f8;
+				background-color: #f8f8f8;
+			}
+			
+			.code .h31 {
+				left: 0;
+			}
+			
+			.code .h32 {
+				left: 102px;
+			}
+			
+			.code .h33 {
+				left: 204px;
+			}
+			
+			.code .h34 {
+				left: 306px;
+			}
+			
+			.code {
+				width: 900px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			pre {
+				padding: 15px 0;
+				border: 1px solid #f0f0f0;
+				background-color: #f8f8f8;
+			}
+			
+			.f-dn {
+				display: none;
+			}
+		</style>
+
+	</body>
+
+</html>
