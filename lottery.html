@@ -15,7 +15,7 @@
 			.rotary {
 				position: relative;
 				width: 100%;
-				height: 800px;
+				height: 500px;;
 				background-size: 90%;
 				background: url(img/bg2.png) no-repeat ;
 			}
@@ -89,6 +89,12 @@
 				color: #ffea76;
 				font-style: normal;
 			}
+			
+			.xieyi p {
+				color: #ffea76;
+				font-style: normal;
+				font-size: 40px;;
+			}
 		</style>
 	</head>
 
@@ -124,14 +130,25 @@
 					<li>1383****364</li>
 				</ul>
 			</div>
-        	<div >
-        		<img style="margin-left:10%;margin-top: 60%;" src="img/优惠券.jpg" />
-        	</div>
 			<div class="result" id="result" style="display: none;">
 				<p id="resultTxt">恭喜您获得了 <em>50</em> 元代金券</p>
 				<a href="javascript:" id="resultBtn" title="关闭">关闭</a>
 			</div>
 		</div>
+		<div>
+			<!--
+            	优惠券展示
+            -->
+			
+		</div>
+		<div class="xieyi" style="margin-left: 5%;">
+        		<p>参与抽奖即代表同意以下协议:</p>
+        		<p>1.本活动最终解释权归本店所有;</p>
+        		<p>2.抵用券可在满足使用条件下抵用装修款或材料款;</p>
+        		<p>3.抵用券不可叠加使用;</p>
+        		<p>4.实物请联系店员凭有效凭证领取;</p>
+        		<p>5.活动时间:2019/2/4至2019/3/7;</p>
+        	</div>
 		
 		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 		<script src="js/jquery/jquery.rotate.min.js"></script>
@@ -143,9 +160,27 @@
 				var $resultBtn = $('#result');
 
 				$rotaryArrow.click(function() {
-					var data = [0, 1, 2, 3, 4, 5, 6, 7];
-					data = data[Math.floor(Math.random() * data.length)];
+					//var data = [0, 1, 2, 3, 4, 5, 6, 7];
+					//data = data[Math.floor(Math.random() * data.length)];
 					//TODO 后端获取中奖信息
+					var data;
+					$.ajax({
+						type: "post",
+						url: "http://localhost:8080/emes/lottery?r=" + Math.random(),
+						async:false,
+						data:{
+							"openId":"123"
+						},
+						dataType: "json",
+						success: function(res) {
+							if (res.code==0) {
+								data=res.detail;
+							}else{
+								alert("请稍后从事");
+								return;
+							}
+						}
+					});	
 					
 					switch(data) {
 						case 1:
