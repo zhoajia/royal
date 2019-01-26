@@ -135,53 +135,78 @@
 				<a href="javascript:" id="resultBtn" title="关闭">关闭</a>
 			</div>
 		</div>
-		<div>
-			<!--
-            	优惠券展示
-            -->
-			
-		</div>
+		<!-- 手机号码 -->
 		<div class="xieyi" style="margin-left: 5%;">
+			<p>手机号码：<input style="height: 44px;font-size: 40px;background-color: #EF4F4F;" type="text" id="openId"/></p>
+		</div>
+		<div class="xieyi" style="margin-left: 5%;margin-top: 10%;"><!--优惠券展示-->
+			<div id="di"><p>点击查看我的中奖信息</p></div>
+			<p id="bonuses"></p>
+			<p id="condition"></p>
+		</div>
+
+		<div class="xieyi" style="margin-left: 5%;margin-top: 10%;">
         		<p>参与抽奖即代表同意以下协议:</p>
         		<p>1.本活动最终解释权归本店所有;</p>
         		<p>2.抵用券可在满足使用条件下抵用装修款或材料款;</p>
         		<p>3.抵用券不可叠加使用;</p>
         		<p>4.实物请联系店员凭有效凭证领取;</p>
-        		<p>5.活动时间:2019/2/4至2019/3/7;</p>
+        		<p>5.使用外挂或平台BUG获得不正当利益，本平台有权回收或取消权益;</p>
+        		<p>6.活动时间:2019/2/4至2019/3/7;</p>
         	</div>
 		
 		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 		<script src="js/jquery/jquery.rotate.min.js"></script>
 		<script>
+			/*电话校验*/
+			function ValidatePhone(val){
+			    var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;//手机号码
+			    var isMob= /^0?1[3|4|5|8][0-9]\d{8}$/;// 座机格式
+			    if(isMob.test(val)||isPhone.test(val)){
+			        return true;
+			    }
+			    else{
+			        return false;
+			    }
+			}
+
 			$(function() {
 				var $rotaryArrow = $('#rotaryArrow');
 				var $result = $('#result');
 				var $resultTxt = $('#resultTxt');
 				var $resultBtn = $('#result');
-
 				$rotaryArrow.click(function() {
-					//var data = [0, 1, 2, 3, 4, 5, 6, 7];
-					//data = data[Math.floor(Math.random() * data.length)];
 					//TODO 后端获取中奖信息
+					// 获取电话号码
+					if(!ValidatePhone($("#openId").val())){
+						alert("请输入正确的手机号");
+						return;
+					}
 					var data;
 					$.ajax({
 						type: "post",
 						url: "http://localhost:8080/emes/lottery?r=" + Math.random(),
 						async:false,
 						data:{
-							"openId":"123"
+							"openId":$("#openId").val()
 						},
 						dataType: "json",
 						success: function(res) {
 							if (res.code==0) {
 								data=res.detail;
+								if(data==-1){
+									alert("你已经抽过奖了，每人只能参加一次");
+									return;
+								}
 							}else{
-								alert("请稍后从事");
+								alert("系统活动繁忙，请稍后再试");
 								return;
 							}
 						}
 					});	
-					
+					if(data==-1){
+						return;
+					}
 					switch(data) {
 						case 1:
 							rotateFunc(1, 87, '恭喜您获得了 <em>1000</em> 元代金券');
@@ -224,11 +249,38 @@
 
 				$result.click(function(){
 					$result.hide();
+					$("#bonuses").html("");
 				})
 				$rotaryArrow.click(function() {
 					$result.hide();
+					$("#bonuses").html("");
 				});
 			});
+			
+		//查看中奖信息
+		$("#di").click(function(){
+			if(!ValidatePhone($("#openId").val())){
+				alert("请输入正确的手机号");
+				return;
+			}
+			$.ajax({
+				type: "post",
+				url: "http://47.101.55.220:8080/emes/lotteryInfo?r=" + Math.random(),
+				async:false,
+				data:{
+					"openId":$("#openId").val()
+				},
+				dataType: "json",
+				success: function(res) {
+					if (res.code==0) {
+						$("#bonuses").html(res.detail)
+					}else{
+						alert("系统活动繁忙，请稍后再试");
+						return;
+					}
+				}
+			});	
+		});
 		</script>
 
 		<style>
