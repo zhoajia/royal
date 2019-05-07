@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="https://cdn.bootcss.com/mui/3.7.1/css/mui.css" rel="stylesheet">
+	</head>
+		
+	<body>
+		<ul class="mui-table-view">
+			
+		</ul>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdn.bootcss.com/mui/3.7.1/js/mui.min.js"></script>
+		
+		<script type="text/javascript">
+			mui.init();
+			$(function(){
+				jQuery.ajax({
+					url : "http://localhost:8080/customerPic/findAllForApp",
+					type : "get",
+					dataType : "json",
+					success: function (data) {
+						for(var i=0;i<data.length;i++){
+							$(".mui-table-view").append(
+								'<li class="mui-table-view-cell mui-media">'
+									+'<a href="explain_detail.html?id='+data[i].id+'">'
+										+'<img class="mui-media-object mui-pull-left" src="http://oss.ntroyalstar.top//'+data[i].img+'">'
+										+'<div class="mui-media-body">'
+										+data[i].customerName
+										+'<p class="mui-ellipsis">'+data[i].remark+'</p>'
+										+'</div>'
+									+'</a>'
+								+'</li>'
+							);
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>
